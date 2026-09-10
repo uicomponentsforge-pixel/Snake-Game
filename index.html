@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
+<title>Snake — Arcade Edition</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="arena">
+
+    <!-- Background grid glow -->
+    <div class="bg-grid" aria-hidden="true"></div>
+
+    <main class="cabinet">
+
+      <!-- ===== Header ===== -->
+      <header class="cabinet-header">
+        <div class="title-block">
+          <h1 class="title">
+            <span class="title-emoji">🐍</span> SNAKE
+            <span class="title-sub">ARCADE</span>
+          </h1>
+        </div>
+
+        <button id="soundToggle" class="icon-btn" type="button" aria-pressed="true" title="Toggle sound">
+          <span class="icon-on">🔊</span>
+          <span class="icon-off">🔇</span>
+        </button>
+      </header>
+
+      <!-- ===== Stat row ===== -->
+      <section class="stat-row" aria-label="Game stats">
+        <div class="stat-card">
+          <span class="stat-label">Score</span>
+          <span id="score" class="stat-value">0</span>
+        </div>
+        <div class="stat-card stat-card--accent">
+          <span class="stat-label">Best</span>
+          <span id="highScore" class="stat-value">0</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Speed</span>
+          <span id="speedTier" class="stat-value">×1</span>
+        </div>
+      </section>
+
+      <!-- ===== Controls row: difficulty + buttons ===== -->
+      <section class="control-row">
+        <label class="difficulty-select">
+          <span class="difficulty-label">Difficulty</span>
+          <select id="difficulty">
+            <option value="easy">Easy</option>
+            <option value="normal" selected>Normal</option>
+            <option value="hard">Hard</option>
+          </select>
+        </label>
+
+        <div class="action-buttons">
+          <button id="startBtn" class="btn btn--primary" type="button">▶ Start</button>
+          <button id="pauseBtn" class="btn" type="button" disabled>⏸ Pause</button>
+        </div>
+      </section>
+
+      <!-- ===== Game board ===== -->
+      <div class="board-wrap">
+        <canvas id="board" width="480" height="480" aria-label="Snake game board"></canvas>
+
+        <!-- Countdown overlay -->
+        <div id="countdownOverlay" class="overlay overlay--hidden">
+          <div id="countdownNumber" class="countdown-number">3</div>
+        </div>
+
+        <!-- Pause overlay -->
+        <div id="pauseOverlay" class="overlay overlay--hidden">
+          <div class="overlay-card">
+            <p class="overlay-title">Paused</p>
+            <p class="overlay-hint">Press Space to resume</p>
+          </div>
+        </div>
+
+        <!-- Start / idle overlay -->
+        <div id="idleOverlay" class="overlay">
+          <div class="overlay-card">
+            <p class="overlay-title">Ready?</p>
+            <p class="overlay-hint">Press Start or hit any arrow key</p>
+          </div>
+        </div>
+
+        <!-- Game over overlay -->
+        <div id="gameOverOverlay" class="overlay overlay--hidden">
+          <div class="overlay-card overlay-card--wide">
+            <p class="overlay-title overlay-title--danger">Game Over</p>
+            <p id="newHighScoreBanner" class="new-high-score overlay--hidden">🏆 New Best Score!</p>
+            <div class="final-stats">
+              <div>
+                <span class="final-stats-label">Final Score</span>
+                <span id="finalScore" class="final-stats-value">0</span>
+              </div>
+              <div>
+                <span class="final-stats-label">Best</span>
+                <span id="finalHighScore" class="final-stats-value">0</span>
+              </div>
+            </div>
+            <button id="restartBtn" class="btn btn--primary" type="button">↻ Restart</button>
+            <p class="overlay-hint">Press Enter to restart</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== Instructions ===== -->
+      <p class="instructions">
+        Move with <kbd>Arrow Keys</kbd> or <kbd>WASD</kbd> · <kbd>Space</kbd> pause · <kbd>Enter</kbd> restart
+      </p>
+
+      <!-- ===== Mobile D-pad ===== -->
+      <div class="dpad" aria-label="Directional controls">
+        <button class="dpad-btn dpad-up" data-dir="up" type="button" aria-label="Move up">▲</button>
+        <button class="dpad-btn dpad-left" data-dir="left" type="button" aria-label="Move left">◀</button>
+        <button class="dpad-btn dpad-down" data-dir="down" type="button" aria-label="Move down">▼</button>
+        <button class="dpad-btn dpad-right" data-dir="right" type="button" aria-label="Move right">▶</button>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
